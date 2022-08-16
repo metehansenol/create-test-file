@@ -1,6 +1,6 @@
 {
   "name": "create-test-file",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Generates dummy files in various types and sizes for testing purposes",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

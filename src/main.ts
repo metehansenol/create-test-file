@@ -3,7 +3,6 @@ import * as path from 'path';
 import { promises as fs } from 'fs';
 import * as yargs from 'yargs';
 import { Creator } from './creator';
-import { parseSizeArg } from './utils';
 
 const main = async () => {
   try {
@@ -33,13 +32,11 @@ const main = async () => {
     const sizeArg = argv['size'];
     const nameArg = argv['name'];
 
-    const size = parseSizeArg(sizeArg);
-
     const filePath = path.join('.', `${nameArg}.${typeArg}`);
 
     const creator = Creator.getInstance(typeArg);
 
-    const stream = await creator.create(size);
+    const stream = await creator.create(sizeArg);
 
     await fs.writeFile(filePath, stream);
 

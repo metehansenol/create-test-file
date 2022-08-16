@@ -15,8 +15,7 @@ export const parseSizeArg = (sizeArg: string): number => {
 };
 
 export const createChunk = (size: number): string => {
-  const charset =
-    'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890';
+  const charset = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890';
   let chunk = '';
 
   for (let i = 0; i < size; i++) {

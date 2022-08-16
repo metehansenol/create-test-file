@@ -3,10 +3,12 @@ import { Readable } from 'stream';
 import { promises as fs } from 'fs';
 import * as jspdf from 'jspdf';
 import { ICreator } from './types';
-import { createChunk, getChunkSize } from './utils';
+import { createChunk, getChunkSize, parseSizeArg } from './utils';
 
 export class PdfCreator implements ICreator {
-  async create(size: number, includeImage = true): Promise<Readable> {
+  async create(fileSize: string, includeImage = true): Promise<Readable> {
+    const size = parseSizeArg(fileSize);
+
     const chunkSize = getChunkSize(size);
 
     const doc = new jspdf.jsPDF();

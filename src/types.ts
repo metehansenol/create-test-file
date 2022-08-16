@@ -1,5 +1,5 @@
 import { Readable } from 'stream';
 
 export interface ICreator {
-  create(size: number): Promise<Readable>;
+  create(fileSize: string): Promise<Readable>;
 }

@@ -2,6 +2,7 @@ import * as path from 'path';
 import { Readable } from 'stream';
 import { promises as fs } from 'fs';
 import { ICreator } from './types';
+import { parseSizeArg } from './utils';
 
 export class JpgCreator implements ICreator {
   async readIntoBuffer(fd: fs.FileHandle): Promise<Buffer> {
@@ -28,7 +29,9 @@ export class JpgCreator implements ICreator {
     return Buffer.from(arrByte);
   }
 
-  async create(size: number): Promise<Readable> {
+  async create(fileSize: string): Promise<Readable> {
+    const size = parseSizeArg(fileSize);
+
     const data = await this.createContent(size);
 
     return Readable.from(data);

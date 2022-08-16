@@ -1,9 +1,11 @@
 import { Readable, Stream } from 'stream';
 import { ICreator } from './types';
-import { createChunk, getChunkSize } from './utils';
+import { createChunk, getChunkSize, parseSizeArg } from './utils';
 
 export class TxtCreator implements ICreator {
-  async create(size: number): Promise<Readable> {
+  async create(fileSize: string): Promise<Readable> {
+    const size = parseSizeArg(fileSize);
+
     const chunkSize = getChunkSize(size);
 
     const rounds = Math.floor(size / chunkSize);
