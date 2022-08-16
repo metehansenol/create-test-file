@@ -10,7 +10,7 @@ const main = async () => {
       return yargs
         .option('type', {
           alias: 't',
-          description: 'File type to be created. Available options are `txt`, `jpg` and `pdf`',
+          description: 'File type to be created. Available options are `txt`, `jpeg` and `pdf`',
           default: 'txt',
           type: 'string',
         })

@@ -4,7 +4,7 @@ import { promises as fs } from 'fs';
 import { ICreator } from './types';
 import { parseSizeArg } from './utils';
 
-export class JpgCreator implements ICreator {
+export class JpegCreator implements ICreator {
   async readIntoBuffer(fd: fs.FileHandle): Promise<Buffer> {
     const buffer = Buffer.alloc(600);
 
@@ -14,7 +14,7 @@ export class JpgCreator implements ICreator {
   }
 
   async createContent(size: number): Promise<Buffer> {
-    const fd = await fs.open(path.join(__dirname, '..', '/untitled.jpg'), 'r');
+    const fd = await fs.open(path.join(__dirname, 'untitled.jpeg'), 'r');
 
     const buffer = await this.readIntoBuffer(fd);
 

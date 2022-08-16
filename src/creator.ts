@@ -1,6 +1,6 @@
 import { ICreator } from './types';
 import { TxtCreator } from './txt-creator';
-import { JpgCreator } from './jpg-creator';
+import { JpegCreator } from './jpeg-creator';
 import { PdfCreator } from './pdf-creator';
 
 export class Creator {
@@ -8,8 +8,8 @@ export class Creator {
     switch (type) {
       case 'txt':
         return new TxtCreator();
-      case 'jpg':
-        return new JpgCreator();
+      case 'jpeg':
+        return new JpegCreator();
       case 'pdf':
         return new PdfCreator();
       default:

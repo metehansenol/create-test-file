@@ -24,12 +24,12 @@ export class PdfCreator implements ICreator {
     doc.text(createChunk(lastRound), 10, i * 10);
 
     if (includeImage) {
-      // const jpgGenerator = new JpgCreator();
+      // const jpegGenerator = new JpegCreator();
       // const imageSize = parseSizeArg('5mb');
-      // const imageData = await jpgGenerator.generateContent(imageSize);
+      // const imageData = await jpegGenerator.generateContent(imageSize);
       // doc.addImage(imageData, 10, ++i * 10, 10, 10);
 
-      const imageData = await fs.readFile(path.join(__dirname, '..', '/trail.jpg'));
+      const imageData = await fs.readFile(path.join(__dirname, 'trail.jpeg'));
       doc.addImage(imageData, 10, ++i * 10, 100, 100);
     }
 
