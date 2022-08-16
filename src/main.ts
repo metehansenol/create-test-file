@@ -7,32 +7,27 @@ import { parseSizeArg } from './utils';
 
 const main = async () => {
   try {
-    const argv = yargs.command(
-      'create-test-file',
-      'Create test file',
-      (yargs: yargs.Argv) => {
-        return yargs
-          .option('type', {
-            alias: 't',
-            description:
-              'File type to be created. Available options are `txt`, `jpg` and `pdf`',
-            default: 'txt',
-            type: 'string',
-          })
-          .option('size', {
-            alias: 's',
-            description: 'File size',
-            default: '256kb',
-            type: 'string',
-          })
-          .option('name', {
-            alias: 'n',
-            description: 'File name',
-            default: 'test',
-            type: 'string',
-          });
-      },
-    ).argv;
+    const argv = yargs.command('create-test-file', 'Create test file', (yargs: yargs.Argv) => {
+      return yargs
+        .option('type', {
+          alias: 't',
+          description: 'File type to be created. Available options are `txt`, `jpg` and `pdf`',
+          default: 'txt',
+          type: 'string',
+        })
+        .option('size', {
+          alias: 's',
+          description: 'The size in bytes with the following suffix: `kb`, `mb`, `gb`',
+          default: '256kb',
+          type: 'string',
+        })
+        .option('name', {
+          alias: 'n',
+          description: 'The filename to be created (relative to current working directory)',
+          default: 'test',
+          type: 'string',
+        });
+    }).argv;
 
     const typeArg = argv['type'];
     const sizeArg = argv['size'];
