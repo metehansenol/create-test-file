@@ -2,7 +2,7 @@
 import * as path from 'path';
 import { promises as fs } from 'fs';
 import * as yargs from 'yargs';
-import { Generator } from './generator';
+import { Creator } from './creator';
 import { parseSizeArg } from './utils';
 
 const main = async () => {
@@ -37,9 +37,9 @@ const main = async () => {
 
     const filePath = path.join('.', `${nameArg}.${typeArg}`);
 
-    const generator = Generator.getInstance(typeArg);
+    const creator = Creator.getInstance(typeArg);
 
-    const stream = await generator.generate(size);
+    const stream = await creator.create(size);
 
     await fs.writeFile(filePath, stream);
 

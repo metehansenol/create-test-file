@@ -1,5 +1,5 @@
 import { Readable } from 'stream';
 
-export interface IGenerator {
-  generate(size: number): Promise<Readable>;
+export interface ICreator {
+  create(size: number): Promise<Readable>;
 }

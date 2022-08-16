@@ -1,9 +1,9 @@
 import * as path from 'path';
 import { Readable } from 'stream';
 import { promises as fs } from 'fs';
-import { IGenerator } from './types';
+import { ICreator } from './types';
 
-export class JpgGenerator implements IGenerator {
+export class JpgCreator implements ICreator {
   async readIntoBuffer(fd: fs.FileHandle): Promise<Buffer> {
     const buffer = Buffer.alloc(600);
 
@@ -12,7 +12,7 @@ export class JpgGenerator implements IGenerator {
     return buffer;
   }
 
-  async generateContent(size: number): Promise<Buffer> {
+  async createContent(size: number): Promise<Buffer> {
     const fd = await fs.open(path.join(__dirname, '..', '/untitled.jpg'), 'r');
 
     const buffer = await this.readIntoBuffer(fd);
@@ -28,8 +28,8 @@ export class JpgGenerator implements IGenerator {
     return Buffer.from(arrByte);
   }
 
-  async generate(size: number): Promise<Readable> {
-    const data = await this.generateContent(size);
+  async create(size: number): Promise<Readable> {
+    const data = await this.createContent(size);
 
     return Readable.from(data);
   }

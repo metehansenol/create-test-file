@@ -2,11 +2,11 @@ import * as path from 'path';
 import { Readable } from 'stream';
 import { promises as fs } from 'fs';
 import * as jspdf from 'jspdf';
-import { IGenerator } from './types';
+import { ICreator } from './types';
 import { createChunk, getChunkSize } from './utils';
 
-export class PdfGenerator implements IGenerator {
-  async generate(size: number, includeImage = true): Promise<Readable> {
+export class PdfCreator implements ICreator {
+  async create(size: number, includeImage = true): Promise<Readable> {
     const chunkSize = getChunkSize(size);
 
     const doc = new jspdf.jsPDF();
@@ -22,7 +22,7 @@ export class PdfGenerator implements IGenerator {
     doc.text(createChunk(lastRound), 10, i * 10);
 
     if (includeImage) {
-      // const jpgGenerator = new JpgGenerator();
+      // const jpgGenerator = new JpgCreator();
       // const imageSize = parseSizeArg('5mb');
       // const imageData = await jpgGenerator.generateContent(imageSize);
       // doc.addImage(imageData, 10, ++i * 10, 10, 10);

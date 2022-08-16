@@ -1,9 +1,9 @@
 import { Readable, Stream } from 'stream';
-import { IGenerator } from './types';
+import { ICreator } from './types';
 import { createChunk, getChunkSize } from './utils';
 
-export class TxtGenerator implements IGenerator {
-  async generate(size: number): Promise<Readable> {
+export class TxtCreator implements ICreator {
+  async create(size: number): Promise<Readable> {
     const chunkSize = getChunkSize(size);
 
     const rounds = Math.floor(size / chunkSize);
