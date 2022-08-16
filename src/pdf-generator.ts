@@ -28,7 +28,7 @@ export class PdfGenerator implements IGenerator {
       // doc.addImage(imageData, 10, ++i * 10, 10, 10);
 
       const imageData = await fs.readFile(path.join(__dirname, '..', '/trail.jpg'));
-      doc.addImage(imageData, 10, ++i * 10, 100, 100)
+      doc.addImage(imageData, 10, ++i * 10, 100, 100);
     }
 
     const arrayBuffer = doc.output('arraybuffer');
