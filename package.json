@@ -2,7 +2,12 @@
   "name": "create-test-file",
   "version": "0.0.1",
   "description": "Generates dummy files in various types and sizes for testing purposes",
-  "main": "dist/main.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/metehansenol/create-test-file.git"
