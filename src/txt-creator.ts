@@ -3,8 +3,9 @@ import { ICreator } from './types';
 import { createChunk, getChunkSize, parseSizeArg } from './utils';
 
 export class TxtCreator implements ICreator {
-  async create(fileSize: string): Promise<Readable> {
-    const size = parseSizeArg(fileSize);
+  // eslint-disable-next-line @typescript-eslint/require-await
+  async create(sizeArg: string): Promise<Readable> {
+    const [size] = parseSizeArg(sizeArg);
 
     const chunkSize = getChunkSize(size);
 
@@ -19,6 +20,6 @@ export class TxtCreator implements ICreator {
 
     stream.end(createChunk(lastRound));
 
-    return Promise.resolve(stream);
+    return stream;
   }
 }

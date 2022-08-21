@@ -1,39 +1,33 @@
-import * as path from 'path';
 import { Readable } from 'stream';
-import { promises as fs } from 'fs';
+import * as Jimp from 'jimp';
 import { ICreator } from './types';
-import { parseSizeArg } from './utils';
+import { getRandomInt, parseSizeArg } from './utils';
 
 export class JpegCreator implements ICreator {
-  async readIntoBuffer(fd: fs.FileHandle): Promise<Buffer> {
-    const buffer = Buffer.alloc(600);
+  async create(sizeArg: string): Promise<Readable> {
+    const [w, h] = parseSizeArg(sizeArg);
 
-    await fd.read(buffer, 0, 600, 0);
+    const image = this.getRandomJimpImage(w, h);
 
-    return buffer;
-  }
-
-  async createContent(size: number): Promise<Buffer> {
-    const fd = await fs.open(path.join(__dirname, 'untitled.jpeg'), 'r');
-
-    const buffer = await this.readIntoBuffer(fd);
-
-    await fd.close();
-
-    const arrByte = new Uint8Array(size);
-
-    for (let i = 0; i < buffer.length; i++) {
-      arrByte[i] = buffer[i];
-    }
-
-    return Buffer.from(arrByte);
-  }
-
-  async create(fileSize: string): Promise<Readable> {
-    const size = parseSizeArg(fileSize);
-
-    const data = await this.createContent(size);
+    const data = await image.getBufferAsync(Jimp.MIME_JPEG);
 
     return Readable.from(data);
+  }
+
+  private getRandomJimpImage(sizeX: number, sizeY: number): Jimp {
+    const image = new Jimp(sizeX, sizeY, 'white', (err, data) => {
+      if (err) {
+        throw err;
+      }
+      return data;
+    });
+
+    for (let x = 0; x < sizeX; x++) {
+      for (let y = 0; y < sizeY; y++) {
+        image.setPixelColor(Jimp.rgbaToInt(getRandomInt(0, 255), getRandomInt(0, 255), getRandomInt(0, 255), getRandomInt(0, 255)), x, y);
+      }
+    }
+
+    return image;
   }
 }

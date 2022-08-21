@@ -16,8 +16,8 @@ const main = async () => {
         })
         .option('size', {
           alias: 's',
-          description: 'The size in bytes with the following suffix: `kb`, `mb`, `gb`',
-          default: '256kb',
+          description: 'The size in bytes with the following suffix: `kb`, `mb`, `gb` or image size like 600x400',
+          default: '1mb',
           type: 'string',
         })
         .option('name', {

@@ -1,6 +1,6 @@
 {
   "name": "create-test-file",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Generates dummy files in various types and sizes for testing purposes",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,15 +18,19 @@
     "url": "https://github.com/metehansenol/create-test-file/issues"
   },
   "homepage": "https://github.com/metehansenol/create-test-file#readme",
-  "bin": "./dist/main.js",
+  "bin": {
+    "create-test-file": "./dist/main.js"
+  },
   "scripts": {
     "start": "node dist/index.js",
     "clean": "rimraf coverage dist tmp",
     "copy-files": "copyfiles -f *.jpeg dist/",
     "build": "npm run clean && tsc -p tsconfig.json && npm run copy-files",
+    "prepack": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "jimp": "^0.16.1",
     "jspdf": "^2.5.1",
     "tslib": "^2.4.0",
     "yargs": "^17.5.1"

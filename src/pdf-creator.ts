@@ -6,32 +6,41 @@ import { ICreator } from './types';
 import { createChunk, getChunkSize, parseSizeArg } from './utils';
 
 export class PdfCreator implements ICreator {
-  async create(fileSize: string, includeImage = true): Promise<Readable> {
-    const size = parseSizeArg(fileSize);
+  // eslint-disable-next-line @typescript-eslint/require-await
+  async create(sizeArg: string, addImage = true): Promise<Readable> {
+    const [size] = parseSizeArg(sizeArg);
 
     const chunkSize = getChunkSize(size);
 
     const doc = new jspdf.jsPDF();
 
     const rounds = Math.floor(size / chunkSize);
-    const lastRound = size % chunkSize;
+    // const lastRound = size % chunkSize;
 
     let i = 1;
+    let line = 25;
+    const lineHeight = 10;
+    const leftMargin = 20;
+    const wrapWidth = 160;
+
     while (i <= rounds) {
-      doc.text(createChunk(chunkSize), 10, i * 10);
+      const text = createChunk(chunkSize);
+      const splitText = doc.splitTextToSize(text, wrapWidth);
+      for (let x = 0, length = splitText.length; x < length; x++) {
+        doc.text(splitText[x], leftMargin, line);
+        line = lineHeight + line;
+      }
       i++;
     }
-    doc.text(createChunk(lastRound), 10, i * 10);
 
-    if (includeImage) {
-      // const jpegGenerator = new JpegCreator();
-      // const imageSize = parseSizeArg('5mb');
-      // const imageData = await jpegGenerator.generateContent(imageSize);
-      // doc.addImage(imageData, 10, ++i * 10, 10, 10);
+    // doc.text(createChunk(lastRound), 10, i * 10);
 
-      const imageData = await fs.readFile(path.join(__dirname, 'trail.jpeg'));
-      doc.addImage(imageData, 10, ++i * 10, 100, 100);
-    }
+    // if (addImage) {
+    //   const jpegCreator = new JpegCreator();
+    //   const imageData = await jpegCreator.create('600x400');
+    //
+    //   doc.addImage(imageData, 10, ++i * 10, 600, 400);
+    // }
 
     const arrayBuffer = doc.output('arraybuffer');
 
