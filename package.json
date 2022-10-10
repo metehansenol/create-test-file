@@ -30,7 +30,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "jimp": "^0.16.1",
+    "jimp": "^0.16.2",
     "jspdf": "^2.5.1",
     "tslib": "^2.4.0",
     "yargs": "^17.5.1"
