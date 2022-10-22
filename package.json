@@ -33,7 +33,7 @@
     "jimp": "^0.16.1",
     "jspdf": "^2.5.1",
     "tslib": "^2.4.0",
-    "yargs": "^17.5.1"
+    "yargs": "^17.6.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.36",
